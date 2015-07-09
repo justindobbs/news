@@ -1,0 +1,69 @@
+{ "web_url": "http://www.nytimes.com/2014/11/21/us/obama-immigration-speech.html", 
+"snippet": "President Obama displayed years of frustration with congressional gridlock as he asserted the powers of the Oval Office to reshape the nation’s immigration system.", 
+"lead_paragraph": "President Obama displayed years of frustration with congressional gridlock as he asserted the powers of the Oval Office to reshape the nation’s immigration system.", 
+"abstract": null, 
+"print_page": "1", 
+"blog": [], 
+"source": "The New York Times", 
+"multimedia": [ 
+  { "width": 190, 
+     "url": "images/2014/11/21/us/21jump-immig/21jump-immig-thumbWide.jpg", 
+	 "height": 126, 
+	 "subtype": "wide", 
+	 "legacy": { 
+	   "wide": "images/2014/11/21/us/21jump-immig/21jump-immig-thumbWide.jpg", 
+	   "wideheight": "126", 
+	   "widewidth": "190" }, 
+	   "type": "image" }, 
+	   { "width": 600, 
+	   "url": "images/2014/11/21/us/21jump-immig/21jump-immig-articleLarge.jpg", 
+	   "height": 401, 
+	   "subtype": "xlarge", 
+	   "legacy": { 
+	     "xlargewidth": "600", 
+		 "xlarge": "images/2014/11/21/us/21jump-immig/21jump-immig-articleLarge.jpg", 
+		 "xlargeheight": "401" }, 
+		   "type": "image" 
+		   }, 
+		   { "width": 75, 
+		   "url": "images/2014/11/21/us/21jump-immig/21jump-immig-thumbStandard-v5.jpg", 
+		   "height": 75, 
+		   "subtype": "thumbnail", 
+		   "legacy": { 
+		   "thumbnailheight": "75", 
+		   "thumbnail": "images/2014/11/21/us/21jump-immig/21jump-immig-thumbStandard-v5.jpg", 
+		   "thumbnailwidth": "75" }, 
+		   "type": "image" } ], 
+"headline": { 
+"main": "Obama, 
+Daring Congress, Acts to Overhaul Immigration", 
+"print_headline": 
+"Obama Moves Ahead on Immigration" }, 
+"keywords": 
+  [ { 
+    "rank": "1", "is_major": "Y", "name": "subject", 
+	"value": "Illegal Immigration" }, 
+	{ "rank": "2", "is_major": "Y", "name": "persons", "value": "Obama, Barack" }, 
+	{ "rank": "3", "is_major": "Y", "name": "glocations", "value": "United States" },
+	{ "rank": "4", "is_major": "N", "name": "subject", "value": "United States Politics and Government" }, 
+	{ "rank": "5", "is_major": "N", "name": "subject", "value": "Executive Orders and Memorandums" }, 
+	{ "rank": "6", "is_major": "N", "name": "subject", "value": "Deportation" } ], 
+
+"pub_date": "2014-11-21T00:00:00Z", 
+"document_type": "article", 
+"news_desk": "National", 
+"section_name": "U.S.", 
+"subsection_name": null, 
+"byline": { "contributor": "Ashley Parker and Julia Preston contributed reporting.", 
+            "person": [ 
+			  { "organization": "", 
+			    "role": "reported", 
+				"firstname": "Michael", 
+				"rank": 1 
+			  } 
+			], 
+			"original": "By MICHAEL D. SHEAR" 
+		  }, 
+"type_of_material": "News", 
+"_id": "546df0ab38f0d80bf3d61966", 
+"word_count": "1113" }

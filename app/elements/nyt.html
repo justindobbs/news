@@ -1,0 +1,204 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/core-ajax/core-ajax.html">
+
+<polymer-element name="nyt-articles" attributes="posts params url changeParam phoneScreen">
+
+	<template>
+   
+		<style>
+	 
+			#section{
+				background: inherit;
+				color: black;
+				font-family: 'times new roman' sans-serif;
+				padding-right: 5px;
+				border-bottom: 1px solid gray;
+			}
+			 
+			#header{ 
+				position: relative;
+				width: 80%;
+				left:0;
+				margin-left:-1px;
+			}
+			 
+			time{
+				position: relative;
+				left:0;
+				color: slategray;
+			}
+			 
+			#results{
+				position: relative;
+				display: block;
+				text-align: center;
+				width:100%;
+				margin:1em;
+			}
+			
+			#sandwich{
+				height:90%;
+				width: 78%;
+				margin: 20px auto 0 auto;
+				font-size: 18px;
+				font-weight: 200;
+				line-height: 30px;
+				background-color: #eee;
+				border-radius: 6px;
+				padding: 40px;
+				box-shadow: 0 1px 4px 0 slategray;
+			}
+	 
+		</style>
+   
+		<core-ajax id='ajax'
+			auto
+			url = '{{url}}'
+			params = '{{param}}'
+			handleAs='json'
+			on-core-response='{{postsLoaded}}' 
+		 ></core-ajax>
+		
+		<template repeat='{{item in posts}}'>
+		
+			<div id="sandwich" >
+				<div layout horizontal center>
+					<span id='section'>{{item.section_name}}</span>
+				</div>
+				<div id='header'>
+					<h2>{{item.headline.print_headline ? item.headline.print_headline : item.headline.main}}</h2>
+				</div>
+				<img src='{{item.multimedia[0].url | buildUrl}}' alt='{{item.multimedia[0].url | buildUrl}}' />
+				<p><time>Published {{item.pub_date | timeString}}</time></p>
+				<p>{{item.byline.original}}</p>
+				<p id='post'>{{item.lead_paragraph ? item.lead_paragraph : item.snippet | filtrate}}</p>
+				<p><a href='{{item.web_url}}' alt='{{item.web_url}}'>Read full story</a>
+			</div>
+		
+		</template><!--end repeat templeate-->
+		
+		<br />
+		
+	</template>
+  
+	<script>
+    (function () {
+      'use strict';
+	  	
+			String.prototype.decodeHTML = function() {
+        var map = {"gt":">" /* , … */};
+        return this.replace(/&(#(?:x[0-9a-f]+|\d+)|[a-z]+);?/gi, function($0, $1) {
+          if ($1[0] === "#") {
+            return String.fromCharCode($1[1].toLowerCase() === "x" ? parseInt($1.substr(2), 16)  : parseInt($1.substr(1), 10));
+          } else {
+            return map.hasOwnProperty($1) ? map[$1] : $0;
+          }
+        });
+      };
+	  
+      Polymer('nyt-articles',{
+				
+				created: function(){
+			
+					document.addEventListener('core-media-change', function(){ });
+
+					this.posts = [];
+					this.q = 'obama';
+					this.sort = 'newest';
+					
+					this.url = 'https://api.nytimes.com/svc/search/v2/articlesearch.json?&api-key=' + window.nytimeskey + '';
+					
+					this.posties = [
+						{	   
+						 "headline": {"print_headline": "Story Headline"},
+						 "pub_date": '12-12-10',
+						 "byline": {"original": "by John Smith"},
+						 "snippet": "snippet",
+						 "web_url": "web_url",
+						 "section_name": "U.S."
+						},
+						{
+						 
+						 "header": {"print_headline": "headline"},
+						 "pub_date": '12-12-12',
+						 "byline": {"original": "by Jane Doe"},
+						 "snippet": "snippet",
+						 "web_url": "web_url",
+						 "section_name": "World"
+						 
+						}
+					];
+					
+					this.param = {"q": "obama","sort": "newest"};
+					this.cache = {};
+					
+				},
+			
+				postsLoaded: function(ev) {
+					
+					// Make a copy of the loaded data
+							
+					if(this.$.ajax.response){
+						app.router.navigate('search/' + this.q, {trigger:false});  
+					this.posts = this.$.ajax.response.response.docs;
+					
+						//this.cache[this.q] = this.$.ajax.response.response.docs;
+					//alert(JSON.stringify(this.$.ajax.response));
+					}
+					else{
+					 
+					this.posts = this.posties;
+					
+					$('article').hide(55).show(555);
+						
+					/*why did this stop working?*/
+					$('article').scrollTop(0);
+					
+						app.router.navigate('search/' + this.q, {trigger:true});    
+					
+					}
+						
+				},
+
+				filtrate: function(v){
+					if(v){
+						return v.decodeHTML();
+					}
+					else{return ""}
+				},
+				
+				timeString: function(v){
+					
+					return v.slice(0,10);
+				
+				},
+				
+				changeParam: function(v,q){
+							
+					this.q = q;		
+					this.param.q = q;
+					this.$.ajax.go();
+					
+				},
+			
+				buildUrl: function(v){
+					if(v){
+								return 'https://www.nytimes.com/' + v;
+					}
+				},
+
+				changeSort: function(e,q){
+					if(e !== "relevance"){
+						this.param.sort = e;
+					}
+					else{ delete this.param.sort }
+					this.$.ajax.go();
+				}
+				
+			});
+
+    })();
+  
+  </script>
+
+</polymer-element>
